@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الثانوية الإعدادية الجديدة - الصويرة</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== الهيدر ===================== -->
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+      <span class="brand-text"><strong data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="tagline">الصويرة - المملكة المغربية</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">الرئيسية</a>
+      <a href="journal.html">المجلة والصحافة</a>
+      <a href="clubs.html">الأندية</a>
+      <a href="radio.html">الإذاعة</a>
+      <a href="schedule.html">استعمال الزمن</a>
+      <a href="news.html">الأخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" type="button">AR / FR / EN</button>
+      <a href="login.html" class="btn btn-primary">تسجيل الدخول</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== شريط الأخبار العاجلة ===================== -->
+<div class="ticker-bar">
+  <div class="ticker-label">عاجل</div>
+  <div class="ticker-track" id="tickerTrack">
+    <span>انطلاق التسجيل في الأندية المدرسية ابتداءً من 12 أكتوبر</span>
+    <span>توزيع الكتب المدرسية المستعملة يوم 15 أكتوبر بالساحة الرئيسية</span>
+    <span>الفروض المحروسة الأولى تنطلق يوم 26 أكتوبر</span>
+    <span>انطلاق التسجيل في الأندية المدرسية ابتداءً من 12 أكتوبر</span>
+    <span>توزيع الكتب المدرسية المستعملة يوم 15 أكتوبر بالساحة الرئيسية</span>
+  </div>
+</div>
+
+<!-- ===================== الهيرو ===================== -->
+<section class="hero">
+  <div class="container">
+    <div>
+      <div class="hero-eyebrow" data-school="heroEyebrow">موقع المؤسسة الرسمي</div>
+      <h1 data-school="heroTitle">بوابتكم الرقمية نحو مدرسة الغد بالصويرة</h1>
+      <p class="lead" data-school="heroLead">فضاء رقمي موحّد يجمع الإدارة والأساتذة والتلاميذ وأولياء الأمور: استعمالات الزمن، المجلة المدرسية، الأندية، والأخبار العاجلة في مكان واحد.</p>
+      <div class="hero-cta">
+        <a href="login.html" class="btn btn-primary btn-lg">ادخل إلى فضائي الشخصي</a>
+        <a href="journal.html" class="btn btn-outline btn-lg">تصفح المجلة الإلكترونية</a>
+      </div>
+      <div id="eventBox" style="margin-top:22px;"><div class="hero-eyebrow" style="margin:0 0 6px;" data-school="eventTitle"></div><div class="countdown-card" id="countdownEl" style="margin-top:0;"></div></div>
+    </div>
+    <div class="hero-visual">
+      <img class="seagull" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+    </div>
+  </div>
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="#FFFCF6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== التعريف بالمؤسسة (يديره المدير ومن يكلّفه) ===================== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head reveal"><div><h2>🏫 تعرّف على مؤسستنا</h2><p>نبذة وصور وفيديوهات تعرّف بالثانوية الإعدادية الجديدة.</p></div></div>
+    <div id="aboutBox" class="about-grid"></div>
+  </div>
+</section>
+
+<!-- ===================== أعمدة سريعة ===================== -->
+<section class="section" style="padding-top:20px;">
+  <div class="container grid-4 reveal">
+    <a href="schedule.html" class="card"><div class="body"><span class="tag">خدمة سريعة</span><h3>📅 استعمال الزمن</h3><p>معاينة وتنزيل مباشر لجدول الحصص حسب القسم.</p></div></a>
+    <a href="clubs.html" class="card"><div class="body"><span class="tag">خدمة سريعة</span><h3>🎭 الأندية المدرسية</h3><p>ستة أندية للانخراط والتعبير عن مواهبك.</p></div></a>
+    <a href="news.html" class="card"><div class="body"><span class="tag">خدمة سريعة</span><h3>📢 غيابات الأساتذة</h3><p>تتبع الحصص الشاغرة أولاً بأول.</p></div></a>
+    <a href="login.html" class="card"><div class="body"><span class="tag">خدمة سريعة</span><h3>🗂️ فضائي الشخصي</h3><p>لوحة خاصة بك حسب صفتك في المؤسسة.</p></div></a>
+  </div>
+</section>
+
+<!-- ===================== المجلة الإلكترونية ===================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><h2>المجلة الإلكترونية والصحافة المدرسية</h2><p>مقالات بأقلام التلاميذ والأساتذة حول الصويرة وقضايا علمية وأدبية.</p></div>
+      <a href="journal.html" class="link-more">كل المقالات ⟵</a>
+    </div>
+    <div class="grid-3 reveal" id="articlesGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== الأندية ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><h2>الأندية الموازية</h2><p>فضاءات لتنمية المواهب خارج الفصل الدراسي.</p></div>
+      <a href="clubs.html" class="link-more">دليل الأندية كاملاً ⟵</a>
+    </div>
+    <div class="grid-3 reveal" id="clubsGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== الإحصائيات ===================== -->
+<section class="stats-band">
+  <div class="container grid-4 reveal" id="statsBand">
+    <div class="stat"><b>91.4%</b><span>نسبة النجاح العامة</span></div>
+    <div class="stat"><b>612</b><span>عدد التلاميذ</span></div>
+    <div class="stat"><b>18</b><span>عدد الأقسام</span></div>
+    <div class="stat"><b>87.2%</b><span>نسبة الامتحان الموحد الإقليمي</span></div>
+  </div>
+</section>
+
+<!-- ===================== الفوتر ===================== -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:14px;">
+        <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+        <span class="brand-text"><strong style="color:#fff" data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="city">الصويرة</span></span>
+      </a>
+      <p style="font-size:13.5px; max-width:32ch;" data-school="address">شارع المسيرة الخضراء، حي الصويرة الجديدة، الصويرة، المملكة المغربية.</p>
+      <div class="social-row">
+        <a href="#" title="فيسبوك" data-social="facebook" style="display:none">f</a><a href="#" title="يوتيوب" data-social="youtube" style="display:none">▶</a><a href="#" title="إنستغرام" data-social="instagram" style="display:none">◎</a><a href="#" title="واتساب" data-social="whatsapp" style="display:none">✆</a>
+      </div>
+    </div>
+    <div>
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><a href="login.html">منظومة مسار</a></li>
+        <li><a href="#">طلب الوثائق</a></li>
+        <li><a href="news.html">غيابات الأساتذة</a></li>
+        <li><a href="journal.html">المجلة الإلكترونية</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>الأقسام</h4>
+      <ul>
+        <li><a href="clubs.html">الأندية المدرسية</a></li>
+        <li><a href="schedule.html">استعمال الزمن</a></li>
+        <li><a href="news.html">الأخبار والإعلانات</a></li>
+        <li><a href="login.html">تسجيل الدخول</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>اتصل بنا</h4>
+      <ul>
+        <li data-hide-if-empty>📧 <a data-link="email" href="#"><bdi data-school="email">contact@ecolejadida.ma</bdi></a></li>
+        <li data-hide-if-empty>📞 <bdi data-school="phone">0524-00-00-00</bdi></li>
+        <li data-hide-if-empty>🖨️ <bdi data-school="fax">0524-00-00-01</bdi></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-school="copyright">© 2026 الثانوية الإعدادية الجديدة - الصويرة. جميع الحقوق محفوظة.</span>
+    <a href="#top" class="back-top">↑</a>
+  </div>
+</footer>
+
+<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/site-info.js"></script>
+<script src="js/media-store.js"></script>
+<script>
+  (function () {
+    const st = DB.settings, box = document.getElementById("eventBox");
+    const ok = st.eventDate && st.eventTitle && new Date(st.eventDate).getTime() > Date.now();
+    if (ok) initCountdown(st.eventDate, "countdownEl"); else if (box) box.style.display = "none";
+  })();
+
+  document.getElementById("articlesGrid").innerHTML = publishedArticles().slice(0, 3).map(articleCardHTML).join("") || '<p class="empty-note">لا توجد مقالات منشورة بعد.</p>';
+
+  (function renderAbout() {
+    const box = document.getElementById("aboutBox");
+    const para = txt => String(txt || "").split(/\n+/).filter(Boolean).map(x => `<p>${esc(x)}</p>`).join("");
+    box.innerHTML = (DB.about || []).map(it => {
+      if (it.type === "image") return `<figure class="about-card"><img src="${IMG_RE.test(it.image) ? it.image : ""}" alt="${esc(it.title)}" loading="lazy"><figcaption><b>${esc(it.title)}</b>${para(it.text)}</figcaption></figure>`;
+      if (it.type === "video") {
+        const m = it.videoUrl ? parseMedia(it.videoUrl) : null;
+        const player = it.mediaId ? `<div class="media-box"><video controls controlsList="nodownload" disablePictureInPicture oncontextmenu="return false" preload="metadata" data-media-id="${esc(it.mediaId)}"></video></div>`
+          : m && m.kind === "youtube" ? `<div class="media-box"><iframe src="https://www.youtube-nocookie.com/embed/${m.id}" title="${esc(it.title)}" allowfullscreen loading="lazy"></iframe></div>`
+          : m && m.kind === "video" ? `<div class="media-box"><video controls controlsList="nodownload" disablePictureInPicture oncontextmenu="return false" preload="metadata" src="${esc(m.url)}"></video></div>` : "";
+        return `<div class="about-card about-video">${player}<div class="about-cap"><b>${esc(it.title)}</b>${para(it.text)}</div></div>`;
+      }
+      return `<div class="about-card about-text"><h3>${esc(it.title)}</h3>${para(it.text)}</div>`;
+    }).join("") || `<p class="empty-note">سيُضاف التعريف بالمؤسسة قريبًا.</p>`;
+    hydrateMedia(box);
+  })();
+
+  const clubsGrid = document.getElementById("clubsGrid");
+  DB.clubs.slice(0,3).forEach(c => {
+    clubsGrid.innerHTML += `
+      <div class="card">
+        <div class="thumb" style="display:flex;align-items:center;justify-content:center;">${clubLogoHTML(c, 76)}</div>
+        <div class="body">
+          <span class="tag">${clubMemberCount(c)} منخرط(ة)</span>
+          <h3>${esc(c.name)}</h3>
+          <p>${esc(c.desc)}</p>
+        </div>
+      </div>`;
+  });
+</script>
+</body>
+</html>

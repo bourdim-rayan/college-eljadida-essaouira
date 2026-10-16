@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استعمال الزمن - الثانوية الإعدادية الجديدة</title>
+<script src="js/guard.js"></script>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+      <span class="brand-text"><strong data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="tagline">الصويرة - المملكة المغربية</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="journal.html">المجلة والصحافة</a>
+      <a href="clubs.html">الأندية</a>
+      <a href="radio.html">الإذاعة</a>
+      <a href="schedule.html" class="active">استعمال الزمن</a>
+      <a href="news.html">الأخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" type="button">AR / FR / EN</button>
+      <a href="login.html" class="btn btn-primary">تسجيل الدخول</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:40px;">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><h2>استعمالات الزمن والتقويم الدراسي</h2><p>اختر قسمك لمعاينة جدول الحصص المنشور من طرف الإدارة.</p></div>
+      <select style="padding:10px 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;" id="classroomPicker" onchange="renderSchedule()"></select>
+    </div>
+
+    <div class="panel reveal">
+      <div id="scheduleBox"></div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:40px;">
+      <div><h2>📝 جدول الفروض والامتحانات</h2></div>
+    </div>
+    <div class="grid-3 reveal" id="examsGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none;padding-top:0;">
+    <span data-school="copyright">© 2026 الثانوية الإعدادية الجديدة - الصويرة. جميع الحقوق محفوظة.</span>
+    <a href="#top" class="back-top">↑</a>
+  </div>
+</footer>
+
+<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/site-info.js"></script>
+<script src="js/timetable.js"></script>
+<script>
+  const picker = document.getElementById("classroomPicker");
+  const pubClasses = sortClasses(DB.classrooms.filter(isSchedulePublished));
+  picker.innerHTML = pubClasses.map(c => `<option value="${esc(c)}">القسم ${esc(c)}</option>`).join("");
+  function renderSchedule() {
+    const box = document.getElementById("scheduleBox");
+    const cls = picker.value;
+    if (!cls) { box.innerHTML = `<p class="empty-note">لم تنشر الإدارة أي استعمال زمن بعد.</p>`; return; }
+    const slots = slotsOfClass(cls), file = (DB.scheduleFiles || {})[cls];
+    box.innerHTML = timetableHTML(slots, { kind: "class", name: cls })
+      + (file ? `<p><button class="btn btn-ghost btn-sm" type="button" onclick="openStoredFile((DB.scheduleFiles||{})['${esc(cls)}'])">📎 فتح الملف (${esc(file.name)})</button></p>` : "");
+  }
+  renderSchedule();
+  const examsGrid = document.getElementById("examsGrid");
+  upcomingExams().forEach(e => {
+    examsGrid.innerHTML += `<div class="card"><div class="body"><span class="tag">${esc(e.classroom)}</span><h3>${esc(e.title)}</h3><p>${esc(e.subject)}</p><div class="meta"><span>${esc(e.date)}</span><span>${esc(e.time)}</span></div></div></div>`;
+  });
+</script>
+</body>
+</html>

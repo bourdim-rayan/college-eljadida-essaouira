@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المجلة الإلكترونية - الثانوية الإعدادية الجديدة</title>
+<script src="js/guard.js"></script>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+      <span class="brand-text"><strong data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="tagline">الصويرة - المملكة المغربية</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="journal.html" class="active">المجلة والصحافة</a>
+      <a href="clubs.html">الأندية</a>
+      <a href="radio.html">الإذاعة</a>
+      <a href="schedule.html">استعمال الزمن</a>
+      <a href="news.html">الأخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" type="button">AR / FR / EN</button>
+      <a href="login.html" class="btn btn-primary">تسجيل الدخول</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:40px;">
+  <div class="container" style="max-width:780px;">
+    <a href="journal.html#mic" class="link-more">⟵ العودة إلى المجلة</a>
+    <article id="micBox" style="margin-top:18px;"></article>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none;padding-top:0;">
+    <span data-school="copyright">© 2026 الثانوية الإعدادية الجديدة - الصويرة. جميع الحقوق محفوظة.</span>
+    <a href="#top" class="back-top">↑</a>
+  </div>
+</footer>
+
+<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/site-info.js"></script>
+<script src="js/articles-ui.js"></script>
+<script src="js/media-store.js"></script>
+<script src="js/mic-ui.js"></script>
+<script src="js/reactions-ui.js"></script>
+<script>
+  (function () {
+    const id = new URLSearchParams(location.search).get("id");
+    const p = DB.micPosts.find(x => x.id === id);
+    const box = document.getElementById("micBox");
+    if (!p) { box.innerHTML = `<div class="alert alert-blue">هذا المنشور غير موجود.</div>`; return; }
+    document.title = p.title + " - الميكروفون التربوي";
+    box.innerHTML = `<span class="tag">${esc(p.type)}</span>
+      <h1 style="font-family:var(--font-display);color:var(--blue-800);margin:10px 0 6px;">${esc(p.title)}</h1>
+      <div style="color:var(--ink-600);font-size:13.5px;margin-bottom:18px;">${esc(p.authorName)} • ${esc(p.createdAt)}</div>
+      ${micPostMediaHTML(p) || '<div class="alert alert-yellow">سيُضاف التسجيل قريبًا.</div>'}
+      <div class="article-body" style="margin-top:14px;">${paragraphsHTML(p.description)}</div>
+      <div id="reactBox"></div>`;
+    renderReactions("reactBox", "mic", p.id);
+    hydrateMedia(box);
+  })();
+</script>
+</body>
+</html>

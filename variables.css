@@ -1,0 +1,68 @@
+/* ===================================================================
+   متغيرات الهوية البصرية - ثانوية الإعدادية الجديدة (الصويرة)
+   الألوان الأساسية: الأزرق (Mogador) + الأصفر (Accent)
+   =================================================================== */
+:root {
+  /* الأزرق */
+  --blue-900: #0A2E63;
+  --blue-800: #0D3B7A;   /* أساسي: الهيدر، الفوتر، العناوين */
+  --blue-600: #1660B0;
+  --blue-400: #2E8BE0;   /* أزرق سماوي: الأزرار الثانوية، الأيقونات */
+  --blue-100: #E7F1FC;
+
+  /* الأصفر */
+  --yellow-500: #FDB913; /* أساسي: أزرار CTA، الشارات */
+  --yellow-400: #FFCB3D;
+  --yellow-100: #FFF6DD;
+
+  /* محايدة */
+  --ink-900: #16233D;
+  --ink-600: #45526B;
+  --ink-300: #8A93A6;
+  --sand-50: #FFFCF6;
+  --white: #FFFFFF;
+  --line: #E7E2D4;
+
+  /* حالات */
+  --success: #1E8E5A;
+  --danger: #D64545;
+
+  /* طبقات وظلال */
+  --shadow-sm: 0 2px 10px rgba(13, 59, 122, 0.08);
+  --shadow-md: 0 10px 30px rgba(13, 59, 122, 0.14);
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* خطوط */
+  --font-display: 'Cairo', 'Tahoma', sans-serif;
+  --font-body: 'Tajawal', 'Tahoma', sans-serif;
+
+  /* الهيدر */
+  --header-h: 76px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background: var(--sand-50);
+  font-size: 16px;
+  line-height: 1.7;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--blue-800); line-height: 1.35; margin: 0 0 .5em; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

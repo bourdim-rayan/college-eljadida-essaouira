@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المجلة الإلكترونية - الثانوية الإعدادية الجديدة</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+      <span class="brand-text"><strong data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="tagline">الصويرة - المملكة المغربية</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="journal.html" class="active">المجلة والصحافة</a>
+      <a href="clubs.html">الأندية</a>
+      <a href="radio.html">الإذاعة</a>
+      <a href="schedule.html">استعمال الزمن</a>
+      <a href="news.html">الأخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" type="button">AR / FR / EN</button>
+      <a href="login.html" class="btn btn-primary">تسجيل الدخول</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:50px 0 80px;">
+  <div class="container" style="grid-template-columns:1fr;text-align:center;">
+    <div>
+      <div class="hero-eyebrow">صوت التلاميذ والأساتذة</div>
+      <h1>المجلة الإلكترونية والصحافة المدرسية</h1>
+      <p class="lead" style="margin:0 auto;">مقالات علمية، أدبية، وتاريخية عن مدينة الصويرة ومحيطها، بأقلام "الصحفيين الناشئين" بالمؤسسة.</p>
+    </div>
+  </div>
+  <div class="wave-divider"><svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="#FFFCF6"/></svg></div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><h2>كل المقالات</h2><p>تصفح آخر إصدارات المجلة المدرسية.</p></div>
+      <a href="login.html" class="btn btn-primary">✍️ طلب رخصة "صحفي ناشئ"</a>
+    </div>
+    <div class="journal-tools" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;">
+      <input type="search" id="artSearch" placeholder="ابحث في المقالات…" aria-label="بحث" style="flex:1 1 220px;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font:inherit;">
+      <div id="catChips" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    </div>
+    <div class="grid-3" id="allArticles"></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="mic">
+  <div class="container">
+    <div class="section-head reveal"><div><h2>🎙️ الميكروفون التربوي</h2><p>بودكاست وتسجيلات صوتية ووثائقيات قصيرة تنشرها الإدارة والأساتذة المكلَّفون.</p></div></div>
+    <div class="grid-3" id="micGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none;padding-top:0;">
+    <span data-school="copyright">© 2026 الثانوية الإعدادية الجديدة - الصويرة. جميع الحقوق محفوظة.</span>
+    <a href="#top" class="back-top">↑</a>
+  </div>
+</footer>
+
+<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/site-info.js"></script>
+<script>
+  let curCat = "الكل";
+  function drawArticles() {
+    const q = document.getElementById("artSearch").value.trim();
+    const all = publishedArticles();
+    const cats = ["الكل"].concat([...new Set(all.map(a => a.category))]);
+    document.getElementById("catChips").innerHTML = cats.map(c => `<button type="button" class="btn btn-sm ${c === curCat ? "btn-primary" : "btn-ghost"}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+    const list = all.filter(a => (curCat === "الكل" || a.category === curCat) && (!q || (a.title + " " + a.excerpt + " " + a.authorName).includes(q)));
+    document.getElementById("allArticles").innerHTML = list.length ? list.map(articleCardHTML).join("") : `<p class="empty-note">لا توجد مقالات مطابقة.</p>`;
+  }
+  document.getElementById("catChips").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if (b) { curCat = b.dataset.cat; drawArticles(); } });
+  document.getElementById("artSearch").addEventListener("input", drawArticles);
+  drawArticles();
+  if (!sessionStorage.getItem("currentUser")) {
+    document.getElementById("micGrid").innerHTML = `<div class="alert alert-blue" style="grid-column:1/-1;">🔒 تسجيلات الميكروفون التربوي للمسجَّلين. <a href="login.html" style="font-weight:700;text-decoration:underline;">سجّل الدخول</a> للاستماع.</div>`;
+  } else
+document.getElementById("micGrid").innerHTML = DB.micPosts.length ? DB.micPosts.map(p => `<a class="card" href="mic.html?id=${encodeURIComponent(p.id)}" style="text-decoration:none;color:inherit;"><div class="thumb" style="display:flex;align-items:center;justify-content:center;font-size:38px;">${p.type === "وثائقي قصير" ? "🎬" : "🎙️"}</div><div class="body"><span class="tag">${esc(p.type)}</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p><div class="meta"><span>${esc(p.authorName)}</span><span>♥ ${p.likes.length} • 💬 ${p.comments.length}</span></div></div></a>`).join("") : '<p class="empty-note">لا توجد إنتاجات بعد.</p>';
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأخبار والإعلانات - الثانوية الإعدادية الجديدة</title>
+<script src="js/guard.js"></script>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img class="brand-emblem" src="assets/logo-white.png" alt="شعار الثانوية الإعدادية الجديدة">
+      <span class="brand-text"><strong data-school="name">الثانوية الإعدادية الجديدة</strong><span data-school="tagline">الصويرة - المملكة المغربية</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="journal.html">المجلة والصحافة</a>
+      <a href="clubs.html">الأندية</a>
+      <a href="radio.html">الإذاعة</a>
+      <a href="schedule.html">استعمال الزمن</a>
+      <a href="news.html" class="active">الأخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" type="button">AR / FR / EN</button>
+      <a href="login.html" class="btn btn-primary">تسجيل الدخول</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="padding-top:40px;">
+  <div class="container">
+    <div class="section-head reveal"><div><h2>الأخبار والإعلانات الرسمية</h2><p>كل مستجدات المؤسسة في مكان واحد.</p></div></div>
+    <div class="grid-3 reveal" id="announcementsGrid"></div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <div><h2>🔔 غيابات الأساتذة والحصص الشاغرة اليوم</h2><p>قسم يُدار حصريًا من طرف الإدارة لضمان مصداقية المعلومة.</p></div>
+    </div>
+    <div class="panel reveal">
+      <table class="data-table">
+        <thead><tr><th>الأستاذ(ة)</th><th>الأقسام</th><th>المادة</th><th>المدة / الحصص</th><th>السبب</th><th>الحالة</th></tr></thead>
+        <tbody id="absenceBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none;padding-top:0;">
+    <span data-school="copyright">© 2026 الثانوية الإعدادية الجديدة - الصويرة. جميع الحقوق محفوظة.</span>
+    <a href="#top" class="back-top">↑</a>
+  </div>
+</footer>
+
+<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/site-info.js"></script>
+<script>
+  const grid = document.getElementById("announcementsGrid");
+  DB.announcements.forEach(a => {
+    grid.innerHTML += `<div class="card"><div class="body">
+      <span class="tag">${a.type}${a.urgent ? " • عاجل" : ""}</span>
+      <h3>${a.title}</h3>
+      <div class="meta"><span>${a.date}</span></div>
+    </div></div>`;
+  });
+  const body = document.getElementById("absenceBody");
+  const act = DB.teacherAbsences.filter(absenceActive);
+  body.innerHTML = act.length ? act.map(t => {
+    const badgeClass = t.status === "غياب مؤكد" ? "badge-red" : "badge-yellow";
+    return `<tr><td>${esc(t.teacher)}</td><td>${absenceClasses(t).map(c => "<bdi>" + esc(c) + "</bdi>").join("، ")}</td><td>${esc(t.subject)}</td><td>${esc(absenceWhen(t))}</td><td>${esc(t.reason || "—")}</td><td><span class="badge ${badgeClass}">${esc(t.status)}</span></td></tr>`;
+  }).join("") : `<tr><td colspan="6" class="empty-note">لا توجد غيابات حاليًا.</td></tr>`;
+</script>
+</body>
+</html>
